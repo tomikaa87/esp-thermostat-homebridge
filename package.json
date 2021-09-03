@@ -1,16 +1,16 @@
 {
   "private": true,
-  "displayName": "Plugin Name",
-  "name": "homebridge-plugin-name",
-  "version": "1.0.0",
-  "description": "A short description about what your plugin does.",
+  "displayName": "ESP Thermostat",
+  "name": "esp-thermostat-homebridge",
+  "version": "0.0.0",
+  "description": "Homebridge integration for ESP Thermostat",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git://github.com/USERNAME/GITHUB_PROJECT_NAME.git"
+    "url": "https://github.com/tomikaa87/esp-thermostat-homebridge.git"
   },
   "bugs": {
-    "url": "https://github.com/USERNAME/GITHUB_PROJECT_NAME/issues"
+    "url": "https://github.com/tomikaa87/esp-thermostat-homebridge/issues"
   },
   "engines": {
     "node": ">=12.13.0",
@@ -24,7 +24,8 @@
     "prepublishOnly": "npm run lint && npm run build"
   },
   "keywords": [
-    "homebridge-plugin"
+    "homebridge-plugin",
+    "esp-thermostat"
   ],
   "dependencies": {},
   "devDependencies": {
