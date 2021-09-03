@@ -1,6 +1,8 @@
 import { Service, PlatformAccessory, CharacteristicValue } from 'homebridge';
 
-import { ExampleHomebridgePlatform } from './platform';
+import { EspThermostatHomebridgePlatform } from './platform';
+
+import * as mqtt from 'mqtt';
 
 /**
  * Platform Accessory
@@ -9,6 +11,7 @@ import { ExampleHomebridgePlatform } from './platform';
  */
 export class ExamplePlatformAccessory {
   private service: Service;
+  private readonly mqttClient: mqtt.Client;
 
   /**
    * These are just used to create a working example
@@ -20,9 +23,23 @@ export class ExamplePlatformAccessory {
   };
 
   constructor(
-    private readonly platform: ExampleHomebridgePlatform,
+    private readonly platform: EspThermostatHomebridgePlatform,
     private readonly accessory: PlatformAccessory,
   ) {
+
+    this.mqttClient = mqtt.connect('mqtt://naspi.home:1883');
+
+    this.mqttClient.on('connect', () => {
+      this.platform.log.info('MQTT client connected');
+
+      this.mqttClient.subscribe('thermostat/temp/current', (error) => {
+        this.platform.log.info('thermostat/temp/current error:', error);
+      });
+    });
+
+    this.mqttClient.on('message', (topic, message) => {
+      this.platform.log.info('MQTT message:', topic, message.toString());
+    });
 
     // set accessory information
     this.accessory.getService(this.platform.Service.AccessoryInformation)!

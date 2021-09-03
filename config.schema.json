@@ -8,8 +8,14 @@
       "name": {
         "title": "Name",
         "type": "string",
+        "required": false,
+        "default": "ESP Thermostat Platform"
+      },
+      "mqttBrokerUrl": {
+        "title": "MQTT Broker URL",
+        "type": "string",
         "required": true,
-        "default": "Example Dynamic Platform"
+        "default": "mqtt://localhost"
       }
     }
   }
